@@ -5,7 +5,7 @@ module.exports = {
     joinmessage(owner) {
         return "Hello "+owner.toString()+". Thanks for inviting me to the server. For the bot to work, there needs to be a \"member\" Role as well as a \"#welcome\" TextChannel.";
     },
-    prerequisiteerror() {
-        return "There was an error in the prerequisite check. Please try again.";
+    welcomechannelerror() {
+        return "There were either zero or more than one Channels found with the name #welcome";
     }
 }
