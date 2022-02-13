@@ -1,7 +1,7 @@
 # GetBusyLiver
 This is a Discord bot that originated in the Warfame CLan Get Busy Living. It's main purpose is to add a pupose to Warframe Clans by enhancing Clan's Discord experience with a bunch of features.
 It is a node.js project with the discord.js library.
-To use this bot, simply create a config.json in the downloaded project folder, with an object that has a field called token, and write your Bot token into it. Then, simply run  index.js with Node.JS and the bot will be up and running.
+To use this bot, simply create a config.json in the downloaded project folder, with an object that has a field called token, and write your Bot token into it. Then, simply run npm install and then run index.js with Node.JS and the bot will be up and running.
 ## Features
 Currently, the following features are intended to be implemented:
 ### WARFRAME IGN (in-game name) to nick
