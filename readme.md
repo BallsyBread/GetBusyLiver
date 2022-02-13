@@ -36,7 +36,7 @@ This Bot is under heavy development. The milestones that are planned include all
 This milestone is achieved when the feature Warframe IGN is implemented.
 ### Version 0.2.0 (Groufinder)
 This milestone is achieved when the feature Service Channels is implemented.
-### Version 0.3.0
+### Version 0.3.0 (Reputation)
 This milestone is achieved when the feature Reputation System is implemented.
-### Version 0.4.0
+### Version 0.4.0 (Events)
 This milestone is achieved when the feature Scheduled Events is implemented.
