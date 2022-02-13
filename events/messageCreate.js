@@ -1,7 +1,3 @@
-function log(text) {
-    console.log(new Date().toLocaleDateString("de-CH")+": "+text);
-}
-
 module.exports = {
     name: 'messageCreate',
     execute(message) {
