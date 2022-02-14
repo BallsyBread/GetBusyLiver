@@ -11,11 +11,12 @@ module.exports = {
         let guildchannels = await guild.channels.fetch();
         //fetch a set (or map i'm not sure) of all channels whose name is welcome
         let welcomechannels = guildchannels.filter(channel => channel.name === "welcome");
-        //ensure that size is 1
+
         //fetch owner
         let guildowner = await guild.members.fetch(guild.ownerId);
         //fetch a new DM channel with owner
         let dmchannel = await guildowner.createDM();
+        //ensure that size is 1
         if (welcomechannels.size !== 1) {
             console.log("Too many or too few welcome channels");
             //send owner an error message
