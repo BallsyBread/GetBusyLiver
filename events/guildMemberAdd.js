@@ -7,7 +7,7 @@ module.exports = {
         if (member.bot) return;
         //fetch member's guild's channels
         let memberguildchannels = await member.guild.channels.fetch();
-        //fetch
+        //find channel with the name welcome
         let mainchannel = memberguildchannels.find(channel => channel.name === "welcome");
         //send joiner a message in welcome channel with Mention
         mainchannel.send(welcomemessage(member.user));
