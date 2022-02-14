@@ -20,7 +20,7 @@ module.exports = {
         if (welcomechannels.size !== 1) {
             console.log("Too many or too few welcome channels");
             //send owner an error message
-            dmchannel.send(welcomechannelerror());
+            dmchannel.send(welcomechannelerror);
             //try to leave the guild
             leave(guild);
             //end event handler
@@ -31,6 +31,6 @@ module.exports = {
         //send instructions to welcome channel and pin the message
         mainchannel.send("Hello");
         //send guildowner welcome message
-        dmchannel.send(joinmessage(guildowner.user));
+        dmchannel.send(joinmessage);
     }
 };

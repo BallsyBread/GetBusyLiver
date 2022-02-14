@@ -2,10 +2,11 @@ let {welcomemessage} = require("../strings/en-US");
 
 module.exports = {
     name: 'guildMemberAdd',
-    execute(member) {
-        let mainchannel;
-        //fetch main channel and log on error
-        member.guild.channels.fetch().then(collection => mainchannel = collection.filter(channel => channel.name === "welcome")).catch(e => console.log(e));
+    async execute(member) {
+        //fetch member's guild's channels
+        let memberguildchannels = await member.guild.channels.fetch();
+        //fetch
+        let mainchannel = memberguildchannels.find(channel => channel.name === "welcome");
         //send joiner a message in welcome channel with Mention
         mainchannel.send(welcomemessage(member.user));
     }
