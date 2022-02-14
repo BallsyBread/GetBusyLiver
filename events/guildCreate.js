@@ -7,33 +7,25 @@ function leave(guild) {
 module.exports = {
     name: 'guildCreate',
     async execute(guild) {
-        let guildowner;
-        let dmchannel;
-        let mainchannel;
-
-        try {
-            // try to fetch guild owner as member, leave if not successful
-            await guild.members.fetch(guild.ownerId).then(owner => guildowner = owner);
-            // try to createDM channel with Owner, leave if not successful
-            await guildowner.createDM().then(channel => dmchannel = channel);
-            // try to fetch all guild channels, leave if not successful
-            await guild.channels.fetch().then(collection => mainchannel = collection.filter(channel => channel.name === "welcome"));
-        }
-        catch(e) {
-            //log error
-            console.log(e);
-            //leave guild on error
-            leave(guild);
-        }
-        //send Owner joinmessage
-        dmchannel.send(joinmessage(guildowner.toString()));
-
-        if (mainchannel.size !== 1) {
+        //fetch owner
+        let guildowner = await guild.members.fetch(guild.ownerId);
+        //fetch a new DM channel with owner
+        let dmchannel = await guildowner.createDM();
+        //fetch all channels of the guild
+        let guildchannels = await guild.channels.fetch();
+        //fetch a set (or map i'm not sure) of all channels whose name is welcome
+        let welcomechannels = guildchannels.filter(channel => channel.name === "welcome");
+        //ensure that size is 1
+        if (welcomechannels.size !== 1) {
             console.log("Too many or too few welcome channels");
+            //send owner an error message
             dmchannel.send(welcomechannelerror());
+            //try to leave the guild
             leave(guild);
+            //end event handler
             return;
         }
-        mainchannel.send("Hello");
+        welcomechannels.find(channel => channel.name === "welcome").send("Hello");
+        dmchannel.send(joinmessage(guildowner.user));
     }
 };
