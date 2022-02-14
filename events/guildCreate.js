@@ -7,15 +7,15 @@ function leave(guild) {
 module.exports = {
     name: 'guildCreate',
     async execute(guild) {
-        //fetch owner
-        let guildowner = await guild.members.fetch(guild.ownerId);
-        //fetch a new DM channel with owner
-        let dmchannel = await guildowner.createDM();
         //fetch all channels of the guild
         let guildchannels = await guild.channels.fetch();
         //fetch a set (or map i'm not sure) of all channels whose name is welcome
         let welcomechannels = guildchannels.filter(channel => channel.name === "welcome");
         //ensure that size is 1
+        //fetch owner
+        let guildowner = await guild.members.fetch(guild.ownerId);
+        //fetch a new DM channel with owner
+        let dmchannel = await guildowner.createDM();
         if (welcomechannels.size !== 1) {
             console.log("Too many or too few welcome channels");
             //send owner an error message
@@ -25,7 +25,11 @@ module.exports = {
             //end event handler
             return;
         }
-        welcomechannels.find(channel => channel.name === "welcome").send("Hello");
+        //now that we know there's only one instance of the channel, we can use find() to get the main channel
+        let mainchannel = welcomechannels.find(channel => channel.name === "welcome");
+        //send instructions to welcome channel and pin the message
+        mainchannel.send("Hello");
+        //send guildowner welcome message
         dmchannel.send(joinmessage(guildowner.user));
     }
 };
