@@ -19,6 +19,7 @@ module.exports = {
         //check if fetched message has a mention of the author of the recieved message, set author's nick to message content and delete the reference message
         if (authmessage.mentions.has(message.author) && authmessage.author.bot) {
             await message.member.setNickname(message.content);
+            //TODO: logic to add user to member role
             authmessage.delete();
         }
         //delete message

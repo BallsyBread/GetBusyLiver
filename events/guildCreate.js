@@ -25,6 +25,8 @@ module.exports = {
             //end event handler
             return;
         }
+        //TODO: logic to determine if roles prerequisites are met
+
         //now that we know there's only one instance of the channel, we can use find() to get the main channel
         let mainchannel = welcomechannels.find(channel => channel.name === "welcome");
         //send instructions to welcome channel and pin the message
