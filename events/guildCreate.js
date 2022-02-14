@@ -11,7 +11,6 @@ module.exports = {
         let guildchannels = await guild.channels.fetch();
         //fetch a set (or map i'm not sure) of all channels whose name is welcome
         let welcomechannels = guildchannels.filter(channel => channel.name === "welcome");
-
         //fetch owner
         let guildowner = await guild.members.fetch(guild.ownerId);
         //fetch a new DM channel with owner

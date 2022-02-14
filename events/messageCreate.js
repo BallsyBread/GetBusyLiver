@@ -1,11 +1,19 @@
 module.exports = {
     name: 'messageCreate',
     async execute(message) {
-        if (message.mentions.repliedUser === null || !message.inGuild() || message.author.bot) return;
-        let welcomechannel = await message.guild.channels.fetch(message.reference.channelId);
+        if (!message.inGuild() || message.author.bot) return;
+        let guildchannels = await message.guild.channels.fetch();
+        let welcomechannel = guildchannels.find(channel => channel.name === "welcome");
+        if (!welcomechannel.lastMessage === message) return;
+        if (message.mentions.repliedUser === null) {
+            message.delete();
+            return;
+        }
         let authmessage = await welcomechannel.messages.fetch(message.reference.messageId);
         if (authmessage.mentions.has(message.author) && authmessage.author.bot) {
-            welcomechannel.send("You just replied to my mention.");
+            await message.member.setNickname(message.content);
+            authmessage.delete();
         }
+        message.delete();
     }
 };
