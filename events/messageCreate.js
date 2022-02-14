@@ -1,7 +1,11 @@
 module.exports = {
     name: 'messageCreate',
-    execute(message) {
+    async execute(message) {
         if (message.mentions.repliedUser === null || !message.inGuild() || message.author.bot) return;
-        console.log(message);
+        let welcomechannel = await message.guild.channels.fetch(message.reference.channelId);
+        let authmessage = await welcomechannel.messages.fetch(message.reference.messageId);
+        if (authmessage.mentions.has(message.author) && authmessage.author.bot) {
+            welcomechannel.send("You just replied to my mention.");
+        }
     }
 };
