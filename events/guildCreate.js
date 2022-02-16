@@ -1,4 +1,4 @@
-let {joinmessage, welcomechannelerror} = require("../strings/en-US");
+let {joinmessage, prerequisiteerror} = require("../strings/en-US");
 
 function leave(guild) {
     guild.leave().then((g) => console.log("left guild"+g.toString())).catch(e => {console.log(e)});
@@ -7,25 +7,32 @@ function leave(guild) {
 module.exports = {
     name: 'guildCreate',
     async execute(guild) {
-        //fetch all channels of the guild
-        let guildchannels = await guild.channels.fetch();
-        //fetch a set (or map i'm not sure) of all channels whose name is welcome
-        let welcomechannels = guildchannels.filter(channel => channel.name === "welcome");
+
         //fetch owner
         let guildowner = await guild.members.fetch(guild.ownerId);
         //fetch a new DM channel with owner
         let dmchannel = await guildowner.createDM();
-        //ensure that size is 1
-        if (welcomechannels.size !== 1) {
-            console.log("Too many or too few welcome channels");
+
+        //fetch all roles of the guild
+        let roles = await guild.roles.fetch();
+        //fetch a set (or map i'm not sure) of all roles whose name is member
+        let memberroles = roles.filter(role => role.name === "member");
+
+        //fetch all channels of the guild
+        let guildchannels = await guild.channels.fetch();
+        //fetch a set (or map i'm not sure) of all channels whose name is welcome
+        let welcomechannels = guildchannels.filter(channel => channel.name === "welcome");
+
+        //ensure that welcomechannels and memberroles size is 1
+        if (welcomechannels.size !== 1 || memberroles.size !== 1) {
+            console.log("Too many or too few welcome channels and/or member roles");
             //send owner an error message
-            dmchannel.send(welcomechannelerror);
+            dmchannel.send(prerequisiteerror);
             //try to leave the guild
             leave(guild);
             //end event handler
             return;
         }
-        //TODO: logic to determine if roles prerequisites are met
 
         //now that we know there's only one instance of the channel, we can use find() to get the main channel
         let mainchannel = welcomechannels.find(channel => channel.name === "welcome");
