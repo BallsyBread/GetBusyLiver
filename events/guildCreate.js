@@ -34,11 +34,17 @@ async function prerequisitesMet(guild) {
     return false;
 }
 
+async function cleanWelcome(guild) {
+    let welcomechannel = guild.channels.cache.find(channel => channel.name === "welcome");
+    let channelmessages = await welcomechannel.messages.fetch();
+    let nonbotmsgs = channelmessages.filter(msg => !msg.author.bot);
+    nonbotmsgs.forEach(msg => msg.delete());
+    console.log("All non Bot messages have been deleted from welcome channel in clan "+guild.name);
+}
+
 module.exports = {
     name: 'guildCreate',
     async execute(guild) {
-
-        console.log(prerequisitesMet(guild));
         //ensure that welcomechannels and memberroles size is 1
         if (!await prerequisitesMet(guild)) {
             //try to leave the guild
@@ -46,12 +52,11 @@ module.exports = {
             //end event handler
             return;
         }
-
         //now that we know there's only one instance of the channel, we can use find() to get the main channel
         let mainchannel = guild.channels.cache.find(channel => channel.name === "welcome");
         //send instructions to welcome channel and pin the message
         mainchannel.send("Hello");
         //send guildowner welcome message
-
+        await cleanWelcome(guild);
     }
 };

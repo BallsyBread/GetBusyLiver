@@ -27,15 +27,20 @@ async function checkPrerequisites(guild) {
     await countWelcomeChannels(guild, owner);
 }
 
+async function cleanWelcome(guild) {
+    let channelmessages = await guild.channels.cache.find(channel => channel.name === "welcome").messages.fetch();
+    await channelmessages.filter(msg => !msg.author.bot).forEach(msg => msg.delete());
+    console.log("All non Bot messages have been deleted from welcome channel in clan "+guild.name);
+}
+
 module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
         console.log(`Ready! Logged in as ${client.user.tag}`);
         //check if all guilds still have only one welcome channel and leave if not the case
-        client.guilds.cache.forEach(guild => {
-            checkPrerequisites(guild);
-        });
+        client.guilds.cache.forEach(guild => checkPrerequisites(guild));
+        client.guilds.cache.forEach(guild => cleanWelcome(guild));
         //TODO: add logic to figure out if someone joined while they were gone and send them a authmessage on the welcome channel
     }
 }
