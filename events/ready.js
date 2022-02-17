@@ -68,9 +68,10 @@ async function verifierCatchUp(guild) {
     if (mentionedusers.size < nonickmembers.size) {
         //filter the following from Members without Nicks: all the members that have not been mentioned
         let userstobementioned = nonickmembers.filter(nonickmember => !mentionedusers.has(nonickmember.user.id));
-        console.log(userstobementioned);
         createAuthMessages(welcomechannel, userstobementioned);
+        return;
     }
+
     //if there's more people mentioned in welcome, remove the surplus of mentions
     if (mentionedusers.size > nonickmembers.size) {
         //filter the following from Mentioned Users: all the users that are still on the server (or at least in the nonick variable)
