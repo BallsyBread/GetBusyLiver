@@ -26,7 +26,7 @@ module.exports = {
         //handle message is in welcome channel, is not a DM and is not by a Bot
 
         //check if message is not a reply and handle appropriately, then return if true
-        if (message.type === "REPLY") {
+        if (message.type !== "REPLY") {
             //handle message is not a reply
 
             //delete the message that was sent (as it's not the reply we're looking for)
