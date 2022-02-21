@@ -5,6 +5,12 @@ module.exports = {
         .setName('user')
         .setDescription('Replies with User Tag and User Id'),
     async execute(interaction) {
-        await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+        const user = interaction.options.getUser('target');
+
+        if (user) {
+            await interaction.reply(`Username: ${user.username}\nID: ${user.id}`);
+        } else {
+            await interaction.reply(`Your username: ${interaction.user.username}\nYour ID: ${interaction.user.id}`);
+        }
     },
 };
