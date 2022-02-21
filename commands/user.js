@@ -3,7 +3,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('user')
-        .setDescription('Replies with User Tag and User Id'),
+        .setDescription('Replies with User Tag and User Id')
+        .addUserOption(option => option.setName('target').setDescription('The user')),
     async execute(interaction) {
         const user = interaction.options.getUser('target');
 
