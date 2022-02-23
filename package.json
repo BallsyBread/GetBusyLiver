@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/BallsyBread/GetBusyLiver/issues"
   },
-  "homepage": "https://github.com/BallsyBread/GetBusyLiver#readme"
+  "homepage": "https://github.com/BallsyBread/GetBusyLiver#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
 }
