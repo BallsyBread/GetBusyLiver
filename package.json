@@ -1,14 +1,16 @@
 {
   "dependencies": {
+    "@discordjs/builders": "^0.11.0",
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0"
   },
   "name": "getbusyliver",
   "version": "0.0.1",
   "description": "Discord Bot for the Warframe Clan GetBusyLiving",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/BallsyBread/GetBusyLiver/issues"
   },
-  "homepage": "https://github.com/BallsyBread/GetBusyLiver#readme"
+  "homepage": "https://github.com/BallsyBread/GetBusyLiver#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
 }
