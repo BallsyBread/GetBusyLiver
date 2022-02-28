@@ -7,9 +7,9 @@ Currently, the following features are intended to be implemented:
 ### WARFRAME IGN (in-game name) to nick
 As people's Discord names do in no way represent their Warframe in-game name, it is sometimes hard to find out, who is who. This feature should solve this issue by doing the following:
 - people that join the server should be promted to enter their Warframe IGN
-- people that haven't entered their Warframe IGN should not be able to see any of the Discord Server's content
-- When someone provides a Warframe IGN, it should be set as their Nickname in the server
-- After a Nickname is set, the person should recieve the member role
+- people that haven't entered their Warframe IGN should not be able to see any of the Discord Server's content, such as other commands or channels
+- When someone provides a Warframe IGN, it should update their presence to show their Warframe IGN
+- After the presence is set, the person should recieve the member role and get access to all other server commands and channels
 ### Service Channels
 There should be a place for people to either request or provide services, and should be able to find a group this way.
 Currently intended are the following services:
